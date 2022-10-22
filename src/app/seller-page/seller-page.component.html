@@ -1,0 +1,140 @@
+<html>
+<header>
+<nav class="navbar navbar-expand-lg  bg-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#"><p class="text-capitalize">SHOPPing.com</p></a>
+    <img src="assets/sh1.png" alt="Logo" width="30" height="24" >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Link</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white " href="#">About Us</a>
+        </li>
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Search-by-Category
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Electronics</a></li>
+            <li><a class="dropdown-item" href="#">Fashion</a></li>
+            <li><a class="dropdown-item" href="#">Phones</a></li>
+            <li><a class="dropdown-item" href="#">Books</a></li>
+            <li><a class="dropdown-item" href="#">Home & Kitchen</a></li>
+            <li><a class="dropdown-item" href="#">Computers</a></li>
+            <li><a class="dropdown-item" href="#">Toys & Games</a></li>
+            <li><a class="dropdown-item" href="#">Beauty</a></li>
+          </ul>
+        </li>
+        
+        
+      <form class="d-flex " role="search">
+        <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning " type="submit">Search</button>
+      </form>
+    </ul>
+      
+      <button class="btn btn-danger mx-2" routerLink="/homepage" type="submit">Log out</button>
+      <button class="btn btn-warning mx-2"  type="submit" routerLink="/sellerprofile">My Account</button>
+      
+    
+    </div>
+  </div>
+</nav>
+</header>
+
+<body>
+  <div class="addproduct">
+    <button class="btn btn-primary" (click)="clickAddProduct()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product</button>
+  </div>
+  <table class="table mt-3" >
+    <thead>
+        <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Category</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of products">
+        <td>{{prod.productId}}</td>
+        <td>{{prod.productName}}</td>
+        <td>{{prod.category}}</td>
+        <td>{{prod.description}}</td>
+        <td>{{prod.price}}</td>
+        <td>{{prod.productImage}}</td>
+        <td>
+          <button style="color:aliceblue;" (click)=" onEdit(prod)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+          <button class="btn btn-danger mx-3" (click)="deleteProduct(prod)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="registerform" >
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Product Name </label>
+                  <input type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="ProductName">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Category</label>
+                  <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="Category">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Price</label>
+                  <input type="number" class="form-control" id="exampleInputPassword1" formControlName="Price">
+              </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="Description">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Product Image</label>
+                    <input type="link" class="form-control" id="exampleInputPassword1" formControlName="ProductImage">
+                </div>
+            </form>
+         </div>
+               <div class="modal-footer">
+              <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" *ngIf="showAdd" (click)="registersubmitted()"  class="btn btn-primary">Add</button>
+              <button type="button" *ngIf="showUpdate" (click)="updateProductDetails()" class="btn btn-primary">Update</button>
+              </div>
+      </div>
+    </div>
+  </div>
+ 
+</body>
+
+
+  
+
+        
+           
+
+<footer class="">
+</footer>
+</html> 
+
+

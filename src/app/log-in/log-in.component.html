@@ -1,0 +1,55 @@
+
+<header>
+
+</header>
+<body>
+<div class="forms">
+<form [formGroup]="loginform" (ngSubmit)="onsubmit()" class="form">
+        <div class="row mb-3 mx-3 mt-3 my-2">
+            <div class="col text-center p-1 mb-1 bg-light" >
+                 <h1>Log In</h1>
+            </div>
+        </div>
+        <!-- input EmailId -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="EmailId" class="form-label">Email</label>
+            <input type="email" class="form-control" id="EmailId" formControlName="EmailId">
+            <div class="form-text text-danger" *ngIf="EmailId.errors?.['required'] && (EmailId.touched || EmailId.dirty)">Email Id is required</div>             
+        </div>   
+        <!-- input password -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password" formControlName="Password">  
+            <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.touched || Password.dirty)">Password is required</div>           
+        </div>
+
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <!-- input Role -->
+            <div> Role</div>
+            <div class="form-check form-check inline">
+                <label for="user" class="form-check-label" >User</label>
+                <input type="radio" class="form-check-input" value="user" id="user" formControlName="Role" > 
+               
+            </div>
+            <div class="form-check form-check inline">
+                <label for="seller" class="form-check-label">Seller</label>
+                <input type="radio" class="form-check-input" value="seller" id="seller" formControlName="Role" > 
+                
+            </div>
+            <div class="form-check form-check inline">
+                <label for="admin" class="form-check-label">Admin</label>
+                <input type="radio" class="form-check-input" value="admin" id="admin" formControlName="Role"> 
+            </div>
+            <div class="form-text text-danger" *ngIf="Role.errors?.['required'] && (Role.touched || Role.dirty)">Role is required</div>   
+        </div>
+        
+   
+    <div class="col mb-2 mx-3 mt-2 my-2">                    
+        <button type="submit"  class="btn btn-primary mb-2">Submit</button>       
+    </div>
+</form>
+</div>
+</body>
+<footer>
+
+</footer>

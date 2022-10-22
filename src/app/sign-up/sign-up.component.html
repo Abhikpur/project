@@ -1,0 +1,113 @@
+<header>
+
+</header>
+<body>
+<div class="forms">
+<form [formGroup]="registerform" (ngSubmit)="registersubmitted()" class="form">
+    <div class="row mb-3 mx-3 mt-3 my-2">
+        <div class="col text-center p-1 mb-1 bg-light" >
+            <h1>Register</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- input First Name -->
+        <div class="col mb-2 mx-3 mt-0 my-2">
+            <label for="FirstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="FirstName" formControlName="FirstName"> 
+            <div class="form-text text-danger" *ngIf="FirstName.errors?.['required'] && (FirstName.touched || FirstName.dirty)">First Name is required</div> 
+            <div class="form-text text-danger" *ngIf="FirstName.errors?.['pattern'] && (FirstName.touched || FirstName.dirty)">First Name's first name can not be number</div>
+        </div>
+        <!-- input Last Name -->
+        <div class="col mb-2 mx-3 mt-0 my-2">
+            <label for="LastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="LastName" formControlName="LastName">
+            <div class="form-text text-danger" *ngIf="LastName.errors?.['required'] && (LastName.touched || LastName.dirty)">Last Name is required</div>  
+        </div>
+    </div>
+    <div class="row">
+        <!-- input EmailId -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="EmailId" class="form-label">Email</label>
+            <input type="email" class="form-control" id="EmailId" formControlName="EmailId">
+            <div class="form-text text-danger" *ngIf="EmailId.errors?.['required'] && (EmailId.touched || EmailId.dirty)">Email Id is required</div>
+            <div class="form-text text-danger" *ngIf="EmailId.errors?.['email'] && (EmailId.touched || EmailId.dirty)">Email should be valid </div>  
+        </div>
+        <!-- input Phone Number -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="MobileNumber" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="MobileNumber" formControlName="MobileNumber">
+            <div class="form-text text-danger" *ngIf="MobileNumber.errors?.['required'] && (MobileNumber.touched || MobileNumber.dirty)">Mobile Number is required</div> 
+            <div class="form-text text-danger" *ngIf="MobileNumber.errors?.['minlength'] && (MobileNumber.touched || MobileNumber.dirty)">Mobile Number is too short</div> 
+            <div class="form-text text-danger" *ngIf="MobileNumber.errors?.['maxlength'] && (MobileNumber.touched || MobileNumber.dirty)">Mobile Number is too large</div>  
+        </div>
+    </div>
+    <div class="row">
+        <!-- input Address -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="AddressInfo" class="form-label">Address Information</label>
+            <input type="text" class="form-control" id="AddressInfo" formControlName="AddressInfo"> 
+            <div class="form-text text-danger" *ngIf="AddressInfo.errors?.['required'] && (AddressInfo.touched || AddressInfo.dirty)">Address Information is required</div> 
+        </div>
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <!-- input Role -->
+            <div> Role</div>
+            <div class="form-check form-check inline">
+                <label for="user" class="form-check-label" >User</label>
+                <input type="radio" class="form-check-input" value="user" id="user" formControlName="Role" > 
+               
+            </div>
+            <div class="form-check form-check inline">
+                <label for="seller" class="form-check-label">Seller</label>
+                <input type="radio" class="form-check-input" value="seller" id="seller" formControlName="Role" > 
+                
+            </div>
+            <!-- <div class="form-check form-check inline">
+                <label for="admin" class="form-check-label">Admin</label>
+                <input type="radio" class="form-check-input" value="admin" id="admin" formControlName="Role"> 
+            </div> -->
+            <div class="form-text text-danger" *ngIf="Role.errors?.['required'] && (Role.touched || Role.dirty)">Role is required</div>   
+        </div>
+    </div>
+    <div class="row">
+        <!-- input City -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="City" class="form-label">City</label>
+            <input type="text" class="form-control" id="City" formControlName="City">  
+            <div class="form-text text-danger" *ngIf="City.errors?.['required'] && (City.touched || City.dirty)">City is required</div>
+        </div>
+        <!-- input  state -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="State" class="form-label">State</label>
+            <input type="text" class="form-control" id="State" formControlName="State">  
+            <div class="form-text text-danger" *ngIf="State.errors?.['required'] && (State.touched || State.dirty)">State is required</div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- input pincode -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="Pincode" class="form-label">Pincode</label>
+            <input type="text" class="form-control" id="Pincode" formControlName="Pincode">  
+            <div class="form-text text-danger" *ngIf="Pincode.errors?.['required'] && (Pincode.touched || Pincode.dirty)">Pincode is required</div>
+        </div>
+        <!-- input password -->
+        <div class="col mb-2 mx-3 mt-2 my-2">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password" formControlName="Password">  
+            <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.touched || Password.dirty)">Password is required</div>
+            <div class="form-text text-danger" *ngIf="Password.errors?.['minlength'] && (Password.touched || Password.dirty)">Password is too short</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-5">
+            <div class="grid">
+                <button type="submit" [disabled]="registerform.invalid" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</body>
+<footer>
+
+</footer>
