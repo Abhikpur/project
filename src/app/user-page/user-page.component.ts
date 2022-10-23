@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/Services/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-
-  constructor() { }
+  userDetails:any;
+  constructor(public auth:AuthService) {}
 
   ngOnInit(): void {
+    this.auth.getUserProfile().subscribe((res:any)=>{
+       this.userDetails=res;
+       console.log(this.userDetails);
+       console.log(this.userDetails.UserId);
+       localStorage.setItem('UserId',this.userDetails.UserId);
+      },
+      err =>{
+       console.log(err);
+      },
+    );
   }
 
 }

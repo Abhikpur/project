@@ -56,11 +56,49 @@
 
 <body>
 
-  
+  <div class="col-md-3">
+    <div class="card" style="width: 20rem; height:35rem;">
+        <div class="img">
+        <img src="assets/man.png" class="card-img-top" alt="...">
+       </div>
+       <div class="text">
+        <div class="card-body">
+          <h5 class="card-title">Welcome User: Your Profile:</h5>
+          <p class="card-text">
+            <li> <span>User Id:</span>{{userDetails.UserId}}</li>
+            <li><span>First Name :</span> {{userDetails.FirstName}}</li>
+            <li><span>Last Name :</span>: {{userDetails.LastName}}</li>
+            <li><p><span>Country :</span> India</p></li>                           
+          </p> 
+        </div>
+    </div>
+    </div> 
+  </div>
+  <div class="col-md-3">
+    <!-- <ng-container *ngFor="let products of products async let i = index"> -->
+    <div class="card" style="width: 20rem; height:35rem;">
+        <!-- <div class="img">
+        <img src="{{products.productImage}}" class="card-img-top" alt="...">
+       </div> -->
+       <div class="text">
+        <div class="card-body">
+          <h5 class="card-title">About Product</h5>
+          <p class="card-text">
+            <!-- <li> {{products.productName|uppercase}}</li>
+            <li>{{products.price|currency:'INR':'symbol-narrow'}}</li>
+            <li>{{products.description}}</li>
+            <li>{{products.category}}</li>                            -->
+          </p>
+            <div>
+              <button class="btn btn-primary mx-2 my-2">Go to Site</button> 
+            </div>
+        </div>
+    </div>
+    </div> 
+  <!-- </ng-container>                      -->
+</div>
 </body>
         
-           
-
 <footer class="">
 </footer>
 </html> 
