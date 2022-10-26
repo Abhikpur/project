@@ -9,45 +9,39 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Link</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link text-white " href="#">About Us</a>
-        </li>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <li class="nav-item dropdown">
+ &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="nav-item dropdown my-4">
           <a class="nav-link dropdown-toggle text-white mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Search-by-Category
+            List of Category You Can Search
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Electronics</a></li>
-            <li><a class="dropdown-item" href="#">Fashion</a></li>
-            <li><a class="dropdown-item" href="#">Phones</a></li>
-            <li><a class="dropdown-item" href="#">Books</a></li>
-            <li><a class="dropdown-item" href="#">Home & Kitchen</a></li>
-            <li><a class="dropdown-item" href="#">Computers</a></li>
-            <li><a class="dropdown-item" href="#">Toys & Games</a></li>
-            <li><a class="dropdown-item" href="#">Beauty</a></li>
+            <li class="dropdown-item" >Electronics</li>
+            <li class="dropdown-item" >Fashion</li>
+            <li class="dropdown-item" >Phones</li>
+            <li class="dropdown-item" >Books</li>
+            <li class="dropdown-item" >Home & Kitchen</li>
+            <li class="dropdown-item" >Computers</li>
+            <li class="dropdown-item" >Toys & Games</li>
+            <li class="dropdown-item" >Beauty</li>
           </ul>
         </li>
         
-        
-      <form class="d-flex " role="search">
-        <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-warning " type="submit">Search</button>
-      </form>
+        <form [formGroup]="nameForm">
+          <p>
+            <input type="text"  class="form-control input-lg my-4" id="name" name="name" formControlName="name">
+          </p>
+       </form>
+       <button type="button" class="btn btn-warning mx-1 my-4 " (click)="clickme()">Search</button>
+      
     </ul>
-      <button class="btn btn-primary " type="submit" routerLink="/login">Cart</button>
+      <button class="btn btn-primary " type="submit" routerLink="/cartpage" >Cart</button>
       <img src="assets/img2.jpg" alt="Logo" width="35" height="35" >
       &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
       <button class="btn btn-danger mx-2" routerLink="/homepage" type="submit">Log out</button>
-      <button class="btn btn-warning mx-2"  type="submit">My Account</button>
+      
     
     </div>
   </div>
@@ -55,9 +49,9 @@
 </header>
 
 <body>
-
+<div class="Helloclass">
   <div class="col-md-3">
-    <div class="card" style="width: 20rem; height:35rem;">
+    <div class="card" style="width: 23rem; height:40rem;">
         <div class="img">
         <img src="assets/man.png" class="card-img-top" alt="...">
        </div>
@@ -65,29 +59,171 @@
         <div class="card-body">
           <h5 class="card-title">Welcome User: Your Profile:</h5>
           <p class="card-text">
-            <li> <span>User Id:</span>{{userDetails.UserId}}</li>
-            <li><span>First Name :</span> {{userDetails.FirstName}}</li>
-            <li><span>Last Name :</span>: {{userDetails.LastName}}</li>
-            <li><p><span>Country :</span> India</p></li>                           
+            <li> <span>User Id:</span>{{id}}</li> 
+            <li><span>Email :</span> {{email}}</li>
+            <li><span>First Name :</span> {{fname}}</li>
+            <li><span>Last Name :</span> {{lname}}</li>
+            <li><span>Mobile Number :</span> {{phone}}</li>
+            <li><span>Address :</span> {{address}}</li>
+            <li><span>City :</span> {{City}}</li>
+            <li><span>State :</span> {{State}}</li>
+            <li><span>Country :</span> India</li>
+            <li><span>User Created on :</span> {{createdate}}</li>  
+            <button class="btn btn-warning mt-4 my-2" (click)=" Edit()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>                         
           </p> 
         </div>
     </div>
     </div> 
   </div>
-  <div class="col-md-3">
-    <!-- <ng-container *ngFor="let products of products async let i = index"> -->
+</div>
+<br>
+<br>
+<h1>You can see your searched products here..</h1>
+<table class="table table-dark" >
+  <thead>
+      <tr>
+          <th scope="col">Product ID</th>
+          <th scope="col">Category</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Product Image</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of products">
+      <td>{{prod.productId}}</td>
+      <td>{{prod.category}}</td>
+      <td>{{prod.productName}}</td>        
+      <td>{{prod.price}}</td>
+      <td>{{prod.description}}</td>
+      <td><img src={{prod.productImage}}></td>
+      <td>
+       
+        <button class="btn btn-warning mx-3" (click)="addToCart(prod)" >Add to cart</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h1>You can see your all products here..</h1>
+<table class="table table-dark" >
+  <thead>
+      <tr>
+          <th scope="col">Product ID</th>
+          <th scope="col">Category</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Product Image</th>
+          <th scope="col">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of products1">
+      <td>{{prod.productId}}</td>
+      <td>{{prod.category}}</td>
+      <td>{{prod.productName}}</td>        
+      <td>{{prod.price}}</td>
+      <td>{{prod.description}}</td>
+      <td><img src={{prod.productImage}}></td>
+      <td>    
+        <button class="btn btn-warning mx-3" (click)="addToCart(prod)">Add to cart</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registerform" >
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">User Id</label>
+            <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="userid">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Role</label>
+            <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="role">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">EmailId</label>
+          <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="emailid">
+         </div>         
+        <div class="mb-3">
+         <label for="exampleInputPassword1" class="form-label">First Name</label>
+         <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="firstName">
+        </div>
+                      
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Last Name </label>
+          <input type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="lastName">
+        </div>               
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Mobile Number</label>
+          <input type="number" class="form-control" id="exampleInputPassword1" formControlName="mobileNumber">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Address</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" formControlName="addressInfo">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">City</label>
+          <input type="link" class="form-control" id="exampleInputPassword1" formControlName="city">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">State</label>
+          <input type="link" class="form-control" id="exampleInputPassword1" formControlName="state">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Pincode</label>
+          <input type="link" class="form-control" id="exampleInputPassword1" formControlName="pincode">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="link" class="form-control" id="exampleInputPassword1" formControlName="password">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Created Date</label>
+          <input type="link" class="form-control" id="exampleInputPassword1" formControlName="createdDate">
+        </div>
+        </form>
+     </div>
+    <div class="modal-footer">
+      <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button"  (click)="updateUserDetails()" class="btn btn-primary">Update</button>
+    
+    </div>
+  </div>
+  </div>
+ </div>
+</body>
+        
+<footer>
+</footer>
+</html> 
+
+ <!-- <div class="col-md-3">
+    <ng-container *ngFor="let products of products async let i = index">
     <div class="card" style="width: 20rem; height:35rem;">
-        <!-- <div class="img">
+        <div class="img">
         <img src="{{products.productImage}}" class="card-img-top" alt="...">
-       </div> -->
+       </div>
        <div class="text">
         <div class="card-body">
           <h5 class="card-title">About Product</h5>
           <p class="card-text">
-            <!-- <li> {{products.productName|uppercase}}</li>
+            <li> {{products.productName|uppercase}}</li>
             <li>{{products.price|currency:'INR':'symbol-narrow'}}</li>
             <li>{{products.description}}</li>
-            <li>{{products.category}}</li>                            -->
+            <li>{{products.category}}</li>                           
           </p>
             <div>
               <button class="btn btn-primary mx-2 my-2">Go to Site</button> 
@@ -95,12 +231,5 @@
         </div>
     </div>
     </div> 
-  <!-- </ng-container>                      -->
-</div>
-</body>
-        
-<footer class="">
-</footer>
-</html> 
-
-
+  </ng-container>                     
+</div> -->

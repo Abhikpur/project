@@ -1,0 +1,10 @@
+.space {
+    width: 4px;
+    height: auto;
+    display: inline-block;
+}
+.thead
+{
+    background-color: rgba(19, 1, 1, 0.885);
+    
+}

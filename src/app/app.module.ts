@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router,RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,8 +14,21 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { AdminAccountComponent } from './admin-page/MyAccount/admin-account/admin-account.component';
-import { ProfileComponent } from './admin-page/Account/profile/profile.component';
 import { SellerProfileComponent } from './seller-page/Account/seller-profile/seller-profile.component';
+import { ProfileComponent } from './admin-page/Account/profile/profile.component';
+import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
+// import{ MatIconmodule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { ToastrService } from 'ngx-toastr';
+import {ToastrModule, ToastrService} from 'ngx-toastr';
+//import { SearchComponent } from './user-page/search/search.component';
+import { HomesearchComponent } from './home-page/homesearch/homesearch.component';
+import { CartuserComponent } from './user-page/cartuser/cartuser.component';
+import { SearchComponent } from './user-page/search/search.component';
+import { OrderComponent } from './order/order.component';
+import { PaymentComponent } from './payment/payment.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +41,15 @@ import { SellerProfileComponent } from './seller-page/Account/seller-profile/sel
     SellerPageComponent,
     AdminAccountComponent,
     ProfileComponent,
-    SellerProfileComponent
+    SellerProfileComponent,
+    ProductComponent,
+    CartComponent,
+    SearchComponent,
+    HomesearchComponent,
+    CartuserComponent,
+    OrderComponent,
+    PaymentComponent,
+    
 
   ],
   imports: [
@@ -37,10 +58,17 @@ import { SellerProfileComponent } from './seller-page/Account/seller-profile/sel
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    // MatIconModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-top-right'
+    })
     
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

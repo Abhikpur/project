@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators,FormGroup,FormControl,AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/Services/auth.service';
+import { AuthGuard } from 'src/Services/Guard.guard';
+import { of } from 'rxjs';
+import { UserDetails } from 'src/Models/UserDetails.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-log-in',
@@ -12,8 +16,10 @@ import { AuthService } from 'src/Services/auth.service';
 })
 export class LogInComponent implements OnInit {
   
-  
-  constructor(private http:HttpClient,private router:Router,private Service: AuthService) { }
+  public user!:UserDetails;
+  public email!:any;
+  public id!:any;
+  constructor(private http:HttpClient,private router:Router,private Service: AuthService,private gservice:AuthGuard,private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +30,7 @@ export class LogInComponent implements OnInit {
       Password:new FormControl("",[Validators.required])
     }
   )
+  
   
   get EmailId():FormControl {
     return this.loginform.get("EmailId") as FormControl;
@@ -38,21 +45,52 @@ export class LogInComponent implements OnInit {
   }
 
   onsubmit(){
-    this.Service.userlogin(this.loginform.value).subscribe(res=>{
-      // localStorage.setItem('token',res.token);
+    this.Service.userlogin(this.loginform.value).subscribe((res:any)=>{
+      // localStorage.setItem('token',res?.token);
       // console.log(res.token); 
-      console.log(this.loginform.value);
-      if(this.loginform.value.EmailId=='admin@gmail.com'&& this.loginform.value.Role=='Admin')
-       {  
-         this.router.navigate(['adminpage']);
+      console.log(res);
+      this.email=res;
+    
+      if(this.loginform.value.EmailId=='admin@gmail.com'&& this.loginform.value?.Role=='Admin')
+       { 
+         this.Service.GetUserDetailsbyEmail(res).subscribe(res2=>
+          {
+            console.log(res);
+            console.log(res2);
+            this.user=res2;
+            this.email=res2.emailId;
+            this.id=res2.userId;
+          })
+         localStorage.setItem('Email',this.email);
+         const navigationExtras: NavigationExtras = {state: { email: this.email}};
+         this.toastr.success("Login Successfully");
+         this.router.navigate(['adminpage'],navigationExtras);
        }
       else if(this.loginform.value.Role=='user')
        {
-         this.router.navigate(['userpage']);  
+         this.Service.GetUserDetailsbyEmail(res).subscribe(res1=>
+         {
+            this.user=res1;
+            this.email=res1.emailId;
+            this.id=res1.userId;         
+          })
+           localStorage.setItem('Email',this.email);
+        //this.router.navigate(['userpage']); 
+        this.toastr.success("Login Successfully");
+         const navigationExtras: NavigationExtras = {state: { email: this.email}};        
+         this.router.navigate(['userpage'],navigationExtras); 
        }
        else if (this.loginform.value.Role=='seller')
        {
-         this.router.navigate(['sellerpage']); 
+        this.Service.GetUserDetailsbyEmail(res).subscribe(res3=>
+          {
+            this.user=res3;
+            this.email=res3.emailId;
+            this.id=res3.userId;
+          })
+        localStorage.setItem('Email',this.email);
+        this.toastr.success("Login Successfully"); 
+        this.router.navigate(['sellerpage']); 
        }
        
     },

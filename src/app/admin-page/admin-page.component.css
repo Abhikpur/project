@@ -1,3 +1,12 @@
+.adminclass{
+    display: flex;
+    position: relative;
+    margin-left: 35rem;
+
+}
+.userclass2{
+    margin-left: 36rem;
+}
 .nav{
     background-color: rgb(2, 2, 30);
 }
@@ -18,3 +27,21 @@
     width: 20rem;
     height: 10rem;
 }
+h1{
+    padding: 20px 20px;
+    display: inline-block;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-size: 3em;
+    overflow: hidden;
+}
+h1 {
+    color: #111;
+    background: #39ff14;
+    box-shadow: 0 0 50px #39ff14;
+}
+
+/* body,br{
+    background-color:  rgba(1, 1, 21, 0.941); */
+/* } */
+

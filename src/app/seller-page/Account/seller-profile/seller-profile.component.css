@@ -1,0 +1,26 @@
+.nav{
+    background-color: rgb(2, 2, 30);
+}
+.container{
+    /* background-image: "assets/Electronicspics/ga1.jpg"; */
+    background-color: rgb(2, 2, 30);
+    padding-top: 2rem;
+    padding-bottom:2rem;
+    padding-right: 2rem;
+}
+.img{
+    width: 10rem;
+    height:10rem;
+    margin-left: 4rem;
+}
+.text{
+    margin-top:4rem;
+    width: 20rem;
+    height: 10rem;
+}
+.Helloclass{
+    text-align: center;
+    display: flex;
+    position: relative;
+    margin-left: 35rem;
+}

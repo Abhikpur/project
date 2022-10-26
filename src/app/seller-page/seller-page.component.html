@@ -9,45 +9,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Link</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link text-white " href="#">About Us</a>
-        </li>
-        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" >Home</a>
+        </li> -->
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Search-by-Category
+            List of Category you can search
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Electronics</a></li>
-            <li><a class="dropdown-item" href="#">Fashion</a></li>
-            <li><a class="dropdown-item" href="#">Phones</a></li>
-            <li><a class="dropdown-item" href="#">Books</a></li>
-            <li><a class="dropdown-item" href="#">Home & Kitchen</a></li>
-            <li><a class="dropdown-item" href="#">Computers</a></li>
-            <li><a class="dropdown-item" href="#">Toys & Games</a></li>
-            <li><a class="dropdown-item" href="#">Beauty</a></li>
+            <li class="dropdown-item" >Electronics</li>
+            <li class="dropdown-item" >Fashion</li>
+            <li class="dropdown-item" >Phones</li>
+            <li class="dropdown-item" >Books</li>
+            <li class="dropdown-item" >Home & Kitchen</li>
+            <li class="dropdown-item" >Computers</li>
+            <li class="dropdown-item" >Toys & Games</li>
+            <li class="dropdown-item" >Beauty</li>
           </ul>
-        </li>
-        
         
       <form class="d-flex " role="search">
         <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-warning " type="submit">Search</button>
       </form>
-    </ul>
-      
+    </ul>      
       <button class="btn btn-danger mx-2" routerLink="/homepage" type="submit">Log out</button>
       <button class="btn btn-warning mx-2"  type="submit" routerLink="/sellerprofile">My Account</button>
-      
-    
     </div>
   </div>
 </nav>
@@ -72,14 +61,14 @@
     <tbody>
       <tr *ngFor="let prod of products">
         <td>{{prod.productId}}</td>
-        <td>{{prod.productName}}</td>
         <td>{{prod.category}}</td>
-        <td>{{prod.description}}</td>
+        <td>{{prod.productName}}</td>        
         <td>{{prod.price}}</td>
-        <td>{{prod.productImage}}</td>
+        <td>{{prod.description}}</td>
+        <td><img src={{prod.productImage}}></td>
         <td>
           <button style="color:aliceblue;" (click)=" onEdit(prod)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
-          <button class="btn btn-danger mx-3" (click)="deleteProduct(prod)">Delete</button>
+          <button class="btn btn-danger mx-3" (click)="deleteProduct(prod.productId)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -94,25 +83,29 @@
         </div>
         <div class="modal-body">
             <form [formGroup]="registerform" >
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Category</label>
+                <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="category">
+              </div>              
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Product Name </label>
-                  <input type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="ProductName">
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Category</label>
-                  <input type="text"  class="form-control" id="exampleInputPassword1" formControlName="Category">
-                </div>
+                  <input type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="productName">
+                </div>               
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Price</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" formControlName="Price">
+                  <input type="number" class="form-control" id="exampleInputPassword1" formControlName="price">
               </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="Description">
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="description">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Product Image</label>
-                    <input type="link" class="form-control" id="exampleInputPassword1" formControlName="ProductImage">
+                    <input type="link" class="form-control" id="exampleInputPassword1" formControlName="productImage">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="description">
                 </div>
             </form>
          </div>
@@ -124,16 +117,11 @@
       </div>
     </div>
   </div>
- 
-</body>
-
-
   
+</body>
+<footer>
 
-        
-           
 
-<footer class="">
 </footer>
 </html> 
 

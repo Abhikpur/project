@@ -1,16 +1,17 @@
 export class UserDetails{
     
-    UserId:number=0;
-    Role:string='';
-    FirstName:string='';
-    LastName:string='';
-    EmailId:string='';
-    MobileNumber:string='';
-    AddressInfo:string='';
-    City:string='';
-    State:string='';
-    Pincode:string='';
-    Password:string='';
-    IsLogin:boolean=false;
+    userId:number=0;
+    role:string='';
+    firstName:string='';
+    lastName:string='';
+    emailId:string='';
+    mobileNumber:string='';
+    addressInfo:string='';
+    city:string='';
+    state:string='';
+    pincode:string='';
+    password:string='';
+    isLogin:boolean=false;
+    createdDate:any;
 
 }

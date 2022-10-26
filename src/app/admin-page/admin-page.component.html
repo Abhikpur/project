@@ -22,14 +22,14 @@
             Search-by-Category
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Electronics</a></li>
-            <li><a class="dropdown-item" href="#">Fashion</a></li>
-            <li><a class="dropdown-item" href="#">Phones</a></li>
-            <li><a class="dropdown-item" href="#">Books</a></li>
-            <li><a class="dropdown-item" href="#">Home & Kitchen</a></li>
-            <li><a class="dropdown-item" href="#">Computers</a></li>
-            <li><a class="dropdown-item" href="#">Toys & Games</a></li>
-            <li><a class="dropdown-item" href="#">Beauty</a></li>
+            <li class="dropdown-item" >Electronics</li>
+            <li class="dropdown-item" >Fashion</li>
+            <li class="dropdown-item" >Phones</li>
+            <li class="dropdown-item" >Books</li>
+            <li class="dropdown-item" >Home & Kitchen</li>
+            <li class="dropdown-item" >Computers</li>
+            <li class="dropdown-item" >Toys & Games</li>
+            <li class="dropdown-item" >Beauty</li>
           </ul>
         </li>        
       <form class="d-flex " role="search">
@@ -44,16 +44,108 @@
   </div>
 </nav>
 </header>
-
+<div class="body1"></div>
+<br><br><br><br>
 <body>
+  <div class="adminclass">
+    <div class="card" style="width: 25rem; height:38rem;">
+        <div class="img">
+        <img src="assets/man.png" class="card-img-top" alt="...">
+       </div>
+       <div class="text">
+        <div class="card-body">
+          <h5 class="card-title">Welcome Admin: Your Profile:</h5>
+          <p class="card-text">
+            <li> <span>User Id:</span>{{id}}</li> 
+            <li><span>Email :</span> {{email}}</li>
+            <li><span>First Name :</span> {{fname}}</li>
+            <li><span>Last Name :</span> {{lname}}</li>
+            <li><span>Mobile Number :</span> {{phone}}</li>
+            <li><span>Address :</span> {{address}}</li>
+            <li><span>City :</span> {{city}}</li>
+            <li><span>State :</span> {{state}}</li>
+            <li><span>Country :</span> India</li>
+            <li><span>User Created on :</span> {{createdate}}</li>  
+            <!-- <button class="btn btn-warning mt-4 my-2"  type="submit">Edit</button>                          -->
 
+          </p> 
+        </div>
+    </div>
+    </div> 
+  </div>
+<br><br><br>
+  <!-- <div class="col-md-3">
+    <ng-container *ngFor="let user of users async let i = index">
+
+    <div class="card" style="width: 25rem; height:44rem;">
+        <div class="img">
+        <img src="assets/man.png" class="card-img-top" alt="...">
+       </div>
+       <div class="text">
+        <div class="card-body">
+          <h5 class="card-title">{{user.role}}</h5>
+          <p class="card-text">
+            <li> <span>User Id:</span>{{user.userId}}</li> 
+            <li><span>Email :</span> {{user.emailId}}</li>
+            <li><span>First Name :</span> {{user.firstName}}</li>
+            <li><span>Last Name :</span> {{user.lastName}}</li>
+            <li><span>Mobile Number :</span> {{user.mobileNumber}}</li>
+            <li><span>Address :</span> {{user.addressInfo}}</li>
+            <li><span>City :</span> {{user.city}}</li>
+            <li><span>State :</span> {{user.state}}</li>
+            <li><span>Country :</span> India</li>
+            <li><span>User Created on :</span> {{user.createdDate}}</li>  
+            <button class="btn btn-warning mt-4 my-2"  type="submit">Edit</button>                         
+          </p> 
+        </div>
+    </div>
+    </div>
+    </ng-container> 
+  </div> -->
+  <div class="userclass2">
+     <h1>All UserDetails</h1>
+  </div>
+
+  <table class="table table-dark" >
+    <thead>
+        <tr>
+            <th scope="col">User Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Pincode</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users async let i = index">
+        <td>{{user.userId}}</td>
+        <td>{{user.emailId}}</td>
+        <td>{{user.firstName}}</td>        
+        <td>{{user.lastName}}</td>
+        <td>{{user.mobileNumber}}</td>
+        <td>{{user.addressInfo}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.state}}</td>
+        <td>{{user.pincode}}</td>
+      </tr>
+    </tbody>
+  </table>
   
 </body>
         
            
+<br>
+<footer>
 
-<footer class="">
+Here are the Order Details..
+
+
 </footer>
+<br><br>
 </html> 
 
 

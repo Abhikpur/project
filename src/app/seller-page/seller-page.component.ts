@@ -1,7 +1,9 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Product } from 'src/Models/Product.model';
 import { AuthService } from 'src/Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-seller-page',
@@ -9,89 +11,156 @@ import { AuthService } from 'src/Services/auth.service';
   styleUrls: ['./seller-page.component.css']
 })
 export class SellerPageComponent implements OnInit {
-
+  formValue !: FormGroup;
   showAdd !: boolean;
   showUpdate !: boolean;
   sellerProductData !:any;
   public product !: any ;
+  public product2 !: Product ;
+  public productid !:any;
   
   public products !: Product[];
-  constructor(private authService:AuthService) { }
-
-  ngOnInit(): void {
-    this.getAllProducts();
-
-  }
-  registerform=new FormGroup(
+  constructor(private authService:AuthService,private formbuilder: FormBuilder,private toastr: ToastrService) { }
+  productName = new FormControl();
+  category = new FormControl();
+  description = new FormControl();
+  price = new FormControl();
+  productImage = new FormControl();
+  public registerform=this.formbuilder.group(
     {
-      Category: new FormControl(""),
-      ProductName: new FormControl(""),
-      Price: new FormControl(""),
-      Description:new FormControl(""),
-      ProductImage: new FormControl("")
+      productName: [''],
+      category: [''],
+      description: [''],
+      price : [0] ,
+      productImage: ['']
     }
   )
+
+  ngOnInit(): void {
+   
+    this.getAllProducts();
+    
+  }
+  
+  
   get Category():FormControl {
-    return this.registerform.get("Category") as FormControl;
+    return this.registerform.get("category") as FormControl;
   }
   get ProductName():FormControl {
-    return this.registerform.get("ProductName") as FormControl;
+    return this.registerform.get("productName") as FormControl;
   }
   get Price():FormControl {
-    return this.registerform.get("Price") as FormControl;
+    return this.registerform.get("price") as FormControl;
   }
   get Description():FormControl {
-    return this.registerform.get("Description") as FormControl;
+    return this.registerform.get("description") as FormControl;
   }
   get ProductImage():FormControl {
-    return this.registerform.get("ProductImage") as FormControl;
+    return this.registerform.get("productImage") as FormControl;
   }
   getAllProducts()
   {
     this.authService.GetAllProduct().subscribe((res :Product[])=>{
     this.products=res;
-    console.log(this.products);
+    
   });
   }
+
   getProductById( val:any)
   {
-   this.authService.GetProduct(val).subscribe(res=>
-    {
-       this.product=res;
-    },
-    err=>
-    {
-      console.log(err);
-    })
+   
+   
+   this.authService.GetProduct(val).subscribe(res=>{
+    console.log(res);
+    
+    });
+    
+    
   }
+
   registersubmitted()
   {
-    console.log(this.registerform.value);
+    //console.log(this.registerform.value);
     this.authService.SaveProduct(this.registerform.value).subscribe(res=>{}),
     (error:any)=>console.log(error);
+    
+    alert("Product added");
     this.registerform.reset();
+    let ref=document.getElementById('cancel');
+    ref?.click();
+    this.getAllProducts();
+    this.toastr.success('Added Successfully');
   }
   clickAddProduct()
   {
-    this.registerform.reset();
+    //this.registerform.reset();
     this.showAdd = true;
     this.showUpdate = false;
+    //this.refreshList();
   }
   updateProductDetails()
   {
+   console.log(this.registerform.value);
+     this.authService.UpdateProduct(this.productid,this.registerform.value).subscribe(res=>{
+      this.toastr.success('Successfully Updated');  
+      //alert("Updated Successfully");
+       
     
+        let ref=document.getElementById('cancel');
+        ref?.click();
+        this.getAllProducts();
+        this.registerform.reset();
+       
+        
+     }),
+     (error:any)=>console.log(error);
+     //this.toastr.error('Please try again');
+         
+  //  
   }
   onEdit(prod:any)
   {
     this.showAdd = false;
     this.showUpdate = true;
-    this.product=this.products.find((u: Product) => u.productId==prod);
-    this.registerform.patchValue(this.product);
+    //console.log(prod);
+    //console.log(prod.productName);
+    this.product=this.authService.GetProduct(prod.productId);
+    this.productid=prod.productId;
+    this.registerform.patchValue({
+      productName: prod.productName,
+      category: prod.category,
+      description: prod.description,
+      price : prod.price ,
+      productImage: prod.productImage
+    });
+    //  console.log(prod);
+    //console.log(this.registerform);
     
+    //console.log(this.product); 
   }
-  deleteProduct(val:any)
-  {
 
+
+  deleteProduct(id:any){
+  if(confirm('Are you sure?'))
+  { 
+    
+    this.authService.DeleteProduct(id).subscribe(res=>{
+    
+      this.getAllProducts();
+     
+     this.toastr.success("Deleted properly");
+    }),
+    (error:any)=>console.log(error);
+   
   }
+  
+  
+}
+refreshList(){
+  this.authService.GetAllProduct().subscribe(data=>{
+    this.products=data;
+    console.log(this.products)
+  });
+}
 }
   

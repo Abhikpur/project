@@ -37,8 +37,8 @@
                 
             </div>
             <div class="form-check form-check inline">
-                <label for="admin" class="form-check-label">Admin</label>
-                <input type="radio" class="form-check-input" value="admin" id="admin" formControlName="Role"> 
+                <label for="Admin" class="form-check-label">Admin</label>
+                <input type="radio" class="form-check-input" value="Admin" id="Admin" formControlName="Role"> 
             </div>
             <div class="form-text text-danger" *ngIf="Role.errors?.['required'] && (Role.touched || Role.dirty)">Role is required</div>   
         </div>
